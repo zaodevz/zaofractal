@@ -1,23 +1,72 @@
 # Deep Research
 
-The DEEP-tier research layer for the ZAO Fractal repo. Where `/reference/` is the curated survey of the fractal-governance lineage, `/research/` is the source-heavy depth - each file is a hub doc with 10+ primary sources, frontmatter, and verdict-first sections.
+The DEEP-tier research layer for the ZAO Fractal repo. Where `/reference/` is the curated survey of the fractal-governance lineage, `/research/` is the source-heavy depth - each file is a hub doc with primary sources, frontmatter, and verdict-first sections.
 
-## Files
+## Structure
+
+```
+/research/
+  README.md                              this file
+  01-foundations-deep.md                 theory + math + ORDAO + comparative
+  02-live-communities-deep.md            Roy/Eden/Aquadac/OF post-mortems
+  03-music-cignals-deep.md               Cignals + Fractal DJ + music DAOs
+  04-async-identity-deep.md              Respect.Games + Frapp-GH + identity
+
+  whitepaper-foundations/                seven sub-docs for the whitepaper
+    INDEX.md
+    README.md                            the 718 dispatch hub
+    01-theory-foundations.md             Larimer + sortition + academic frame
+    02-respect-game-mechanism.md         Fibonacci math, decay, Sybil, Gini
+    03-ordao-onchain-architecture.md     OREC three-phase cycle in code
+    04-comparative-dao-governance.md     vs token-weighted, quadratic, Nouns, Moloch
+    05-critiques-failure-modes.md        the honest chapter
+    06-whitepaper-craft.md               document structure + voice
+    07-zao-fractal-distinctness.md       ZAO's specific story
+
+  primary-sources/                       the canonical mechanics specs
+    INDEX.md
+    ordao-respect-system.md              ORDAO + Respect Game system, full mechanics
+    respect-deep-dive.md                 decay, Gini, tiers, voting weight
+
+  context/                               adjacent governance frames
+    INDEX.md
+    superchain-ordao-crosschain.md       cross-chain fractal governance
+    sociocracy-circles-small-teams.md    consent-not-consensus, role rotation
+    plural-events-deliberation-toolkit.md  large-scale deliberation tools
+
+  external/                              cross-cutting deep research
+    INDEX.md
+    fractal-governance-external-deep-research.md  beyond ZAO's immediate lineage
+```
+
+## Top-level hub docs (01-04)
 
 | # | File | Topic | Lines | Sources |
 |---|------|-------|-------|---------|
-| 01 | [foundations-deep.md](01-foundations-deep.md) | Larimer + sortition history + Respect Game math + Sybil defenses + ORDAO contracts + comparative DAO frameworks | ~700 | 23 |
-| 02 | [live-communities-deep.md](02-live-communities-deep.md) | Roy Fractal at 700+ scale, Eden Fractal Epoch 2, Aquadac 12-week season model, Optimism Fractal pause autopsy | ~400 | 10 |
-| 03 | [music-cignals-deep.md](03-music-cignals-deep.md) | Cignals competition app, Fractal DJ history, music DAOs that tried peer-ranked governance, what changes if ZAO ranks tracks instead of contributions | ~530 | 20 |
-| 04 | [async-identity-deep.md](04-async-identity-deep.md) | Respect.Games beta, Fractal Circles revival, GitHub-native fractal spec (Frapp-GH), identity interop landscape (FID + ENS + Hats + EigenTrust + Gitcoin Passport + ERC-8004 + Karma3Labs) | ~780 | 12 |
+| 01 | [01-foundations-deep.md](01-foundations-deep.md) | Larimer + sortition history + Respect Game math + Sybil defenses + ORDAO contracts + comparative DAO frameworks | ~700 | 23 |
+| 02 | [02-live-communities-deep.md](02-live-communities-deep.md) | Roy Fractal at 700+ scale, Eden Fractal Epoch 2, Aquadac 12-week season, Optimism Fractal pause autopsy | ~400 | 10 |
+| 03 | [03-music-cignals-deep.md](03-music-cignals-deep.md) | Cignals, Fractal DJ, music DAOs that tried peer-ranked governance, what changes if ZAO ranks tracks | ~530 | 20 |
+| 04 | [04-async-identity-deep.md](04-async-identity-deep.md) | Respect.Games, Fractal Circles revival, Frapp-GH spec, identity interop landscape | ~780 | 12 |
 
-## How to use
+## Sub-folders
 
-- **Writing the ZAO Fractal whitepaper?** 01 is the spine for Chapters 1-7 (theory, mechanism, on-chain, comparison). 02 fills the "lineage and lessons" chapter. 04's Frapp-GH section is the "where we go next" chapter.
+| Folder | What | When to use |
+|--------|------|-------------|
+| `whitepaper-foundations/` | Seven sub-docs that feed the 11-chapter ZAO Fractal Whitepaper. Each is a chapter-foundation. | Drafting the whitepaper |
+| `primary-sources/` | The canonical ORDAO + Respect mechanics specs (the original DEEP docs every other doc traces back to) | Implementing or reviewing contract behavior |
+| `context/` | Adjacent governance frames (Superchain cross-chain, sociocracy circles, plural events) | Writing the comparative chapter or designing sprint adaptations |
+| `external/` | Cross-cutting external research, sources beyond the immediate ZAO lineage | Literature reviews, breadth checks |
+
+Total in `/research/`: ~6500 lines, 250+ unique sources.
+
+## How to navigate
+
+- **First time here?** Read this README + the four hub docs (01-04). Then dive into `whitepaper-foundations/` if you are writing the whitepaper.
+- **Writing the whitepaper?** `whitepaper-foundations/INDEX.md` maps each sub-doc to a chapter.
+- **Implementing contracts?** `primary-sources/INDEX.md`.
+- **Comparing fractal vs other governance models?** `context/INDEX.md` + the comparative section of `01-foundations-deep.md`.
+- **Need a source we haven't cited?** `external/INDEX.md`.
 - **Onboarding a new contributor?** Start them at `/reference/` for the shallow pass. Send them to `/research/` only when they need depth.
-- **Pitching grants or partnerships?** 01's comparative section (ORDAO vs OZ Governor vs Compound vs Moloch) and 02's lessons-from-OF-pause make the strongest defensive arguments.
-- **Building the music-fractal variant?** 03 is the design doc. Layer 1 (contribution ranking) and Layer 2 (track ranking) are the two-mode framing.
-- **Working on async layer or identity verification?** 04 has the revival plan for Fractal Circles, the MVP spec for Frapp-GH, and the identity-stacking strategy (internal ZAO vs public Frapp-GH vs cross-DAO).
 
 ## Tier policy
 
@@ -27,4 +76,6 @@ Re-validate every 4-6 weeks. APIs, contract addresses, and community participati
 
 ## Source provenance
 
-External claims are sourced to primary URLs (Larimer's books, official websites, Medium articles, GitHub repos, governance forums, academic papers). ZAO-internal claims (contract addresses, OREC transaction counts, bot version history, weekly cadence) draw from the ZAO OS V1 research library and on-chain data. Full source index per file at the bottom of each doc.
+External claims are sourced to primary URLs (Larimer's books, official websites, Medium articles, GitHub repos, governance forums, academic papers). ZAO-internal claims (contract addresses, OREC transaction counts, bot version history, weekly cadence) draw from the ZAO OS V1 research library and on-chain data.
+
+The sub-folders (`whitepaper-foundations/`, `primary-sources/`, `context/`, `external/`) are imported verbatim from the ZAO OS V1 research library (docs 056, 058, 184, 497, 657, 705, 718a-g). They retain their original cross-references to ZAO research doc numbers - follow the trail in the source repo for full lineage.
