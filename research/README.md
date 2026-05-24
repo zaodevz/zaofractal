@@ -42,6 +42,13 @@ The DEEP-tier research layer for the ZAO Fractal repo. Where `/reference/` is th
     INDEX.md
     01-fractalbot-walkthrough.md         the Discord bot (52 commands, Python)
     02-ordao-contracts-walkthrough.md    OREC + Respect1155 Solidity + orclient SDK
+
+  fractal-deep/                          end-to-end history of every fractal + offshoot
+    INDEX.md
+    01-eos-fractally-origins.md          EOS chain + Fractally protocol (both dormant)
+    02-eden-fractal-full-history.md      Eden on EOS through Epoch 2 Base
+    03-optimism-fractal-full-history.md  Oct 2023 launch through Jan 2026 pause
+    04-optimystics-tools-survey.md       full Optimystics tool catalog with ZAO verdicts
 ```
 
 ## Top-level hub docs (01-06)
@@ -64,8 +71,9 @@ The DEEP-tier research layer for the ZAO Fractal repo. Where `/reference/` is th
 | `context/` | Adjacent governance frames (Superchain cross-chain, sociocracy circles, plural events) | Writing the comparative chapter or designing sprint adaptations |
 | `external/` | Cross-cutting external research, sources beyond the immediate ZAO lineage | Literature reviews, breadth checks |
 | `code-walk/` | Annotated walkthroughs of the Discord bot and ORDAO Solidity contracts | Engineering onboarding, security review, fork or extension work |
+| `fractal-deep/` | End-to-end history of every fractal community + the full Optimystics tool catalog | Need depth on a specific fractal (EOS, Eden, OF) or want to know which Optimystics tools to USE/PILOT/IGNORE/ABANDON |
 
-Total in `/research/`: ~10500 lines, 320+ unique sources. Plus `/whitepaper/draft/` (Ch.1-3 first drafts, ~8200 words) - see [whitepaper/README.md](../whitepaper/README.md).
+Total in `/research/`: ~13000 lines, 420+ unique sources. Plus `/whitepaper/draft/` (Ch.1-3 first drafts, ~8200 words) - see [whitepaper/README.md](../whitepaper/README.md).
 
 ## How to navigate
 
