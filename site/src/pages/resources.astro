@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { marked } from 'marked';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+// Inline-render RESOURCES.md from the parent repo using marked
+const filePath = path.resolve('../RESOURCES.md');
+let html = '';
+try {
+  const md = await fs.readFile(filePath, 'utf-8');
+  // Strip the leading H1 since we render our own
+  const stripped = md.replace(/^#\s.+$/m, '').trim();
+  html = await marked.parse(stripped);
+} catch (e) {
+  html = '<p>RESOURCES.md not found at expected path.</p>';
+}
+---
+<BaseLayout title="Resources">
+  <h1>Resources Index</h1>
+  <p class="muted">
+    Canonical index of every person, organization, community, contract, tool, paper,
+    and URL cited across this repo. One place to find any reference.
+  </p>
+  <article set:html={html} />
+</BaseLayout>

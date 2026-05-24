@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const reference = await getCollection('reference');
+const research = await getCollection('research');
+const whitepaper = await getCollection('whitepaper');
+
+const refCount = reference.length;
+const resCount = research.length;
+const wpCount = whitepaper.length;
+---
+<BaseLayout title="ZAOfractal">
+  <h1 class="tag-orange">ZAOfractal</h1>
+
+  <p style="font-size: 1.1rem; color: var(--text-muted);">
+    Home of <strong style="color: var(--text)">ZAO Fractal</strong> - the weekly Respect Game
+    that has run unbroken on Mondays at 6pm EST since around August 2024. The only
+    music-focused fractal in existence, the only active fractal on Optimism, and one
+    of two on the Ethereum Superchain.
+  </p>
+
+  <h2>What is a fractal?</h2>
+  <p>
+    A small-group consensus meeting that distributes a soulbound reputation token
+    (Respect) to participants based on how their peers rank their recent contribution.
+    Repeat weekly. Governance weight comes from contribution, not capital.
+  </p>
+  <p>
+    The idea was formalized by Daniel Larimer in <em>More Equal Animals</em> (Feb 20, 2021)
+    and the Fractally protocol (Jan 28, 2022). Eden Fractal proved it could run for years.
+    Optimism Fractal brought it to Ethereum. ZAO Fractal is the first to apply it to music.
+  </p>
+
+  <h2>Browse</h2>
+  <div class="doc-grid">
+    <div class="doc-card">
+      <a href="/reference">
+        <div class="title tag-orange">Reference</div>
+        <div class="meta">{refCount} files - shallow lineage survey</div>
+        <p class="muted" style="margin-top: 0.5rem; font-size: 0.9rem;">
+          Every fractal that ever existed (Larimer, Fractally, Eden, Optimism, Roy, Aquadac).
+          Start here.
+        </p>
+      </a>
+    </div>
+    <div class="doc-card">
+      <a href="/research">
+        <div class="title tag-cyan">Research</div>
+        <div class="meta">{resCount} files - DEEP-tier, 500+ sources</div>
+        <p class="muted" style="margin-top: 0.5rem; font-size: 0.9rem;">
+          Theory, mechanism, ORDAO contracts, communities, music, async, identity,
+          tooling, the full Optimystics catalog, and history of every fractal end to end.
+        </p>
+      </a>
+    </div>
+    <div class="doc-card">
+      <a href="/whitepaper">
+        <div class="title tag-gold">Whitepaper</div>
+        <div class="meta">{wpCount} files - magnum opus drafts</div>
+        <p class="muted" style="margin-top: 0.5rem; font-size: 0.9rem;">
+          The ZAO Fractal Whitepaper. Chapters 1-3 in v0.1 draft. Chapters 4-11
+          still to come.
+        </p>
+      </a>
+    </div>
+    <div class="doc-card">
+      <a href="/resources">
+        <div class="title tag-orange">Resources</div>
+        <div class="meta">Master index</div>
+        <p class="muted" style="margin-top: 0.5rem; font-size: 0.9rem;">
+          Every person, organization, community, contract, tool, paper, and URL
+          cited across the repo. One place to find any reference.
+        </p>
+      </a>
+    </div>
+  </div>
+
+  <h2>Live ZAO Fractal facts (as of May 2026)</h2>
+  <table>
+    <tbody>
+      <tr><td><strong>Cadence</strong></td><td>Mondays 6pm EST, weekly. Also runs anytime with 4+ unplayed members.</td></tr>
+      <tr><td><strong>Streak</strong></td><td>100+ continuous weeks</td></tr>
+      <tr><td><strong>Surface</strong></td><td>Discord bot <code>fractalbotmarch2026</code> (52 slash commands, v2.1)</td></tr>
+      <tr><td><strong>Chain</strong></td><td>Optimism (OP Mainnet)</td></tr>
+      <tr><td><strong>OREC executor</strong></td><td><code>0xcB05F9254765CA521F7698e61E0A6CA6456Be532</code></td></tr>
+      <tr><td><strong>OG Respect (ERC-20, fractals 1-73)</strong></td><td><code>0x34cE89baA7E4a4B00E17F7E4C0cb97105C216957</code></td></tr>
+      <tr><td><strong>ZOR Respect (ERC-1155, fractals 74+)</strong></td><td><code>0x9885CCeEf7E8371Bf8d6f2413723D25917E7445c</code></td></tr>
+      <tr><td><strong>Submission UI</strong></td><td><a href="https://zao.frapps.xyz/submitBreakout">zao.frapps.xyz/submitBreakout</a></td></tr>
+      <tr><td><strong>OREC transactions</strong></td><td>242+ as of May 21, 2026</td></tr>
+    </tbody>
+  </table>
+
+  <h2>About this site</h2>
+  <p>
+    Auto-generated from the Markdown source in the
+    <a href="https://github.com/ZAODEVZ/ZAOfractal">ZAODEVZ/ZAOfractal</a> repo
+    via Astro. Every file under <code>reference/</code>, <code>research/</code>,
+    and <code>whitepaper/</code> in the repo gets a page here. Push to <code>main</code>
+    and the site rebuilds.
+  </p>
+</BaseLayout>

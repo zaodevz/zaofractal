@@ -1,0 +1,23 @@
+---
+import { getCollection, render } from 'astro:content';
+import DocLayout from '../../layouts/DocLayout.astro';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('reference');
+  return docs.map((doc) => ({
+    params: { slug: doc.id.replace(/\.md$/, '') },
+    props: { doc },
+  }));
+}
+
+const { doc } = Astro.props;
+const { Content } = await render(doc);
+const fm: any = (doc as any).data ?? {};
+
+// Derive title from first H1 in body or from slug
+const h1 = doc.body?.match(/^#\s+(.+)$/m)?.[1];
+const title = (fm.title as string) ?? h1 ?? doc.id;
+---
+<DocLayout title={title} collection="reference" slug={doc.id.replace(/\.md$/, '')} frontmatter={fm}>
+  <Content />
+</DocLayout>

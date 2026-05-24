@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const docs = await getCollection('research');
+
+const topLevel = docs.filter((d) => !d.id.includes('/'));
+const subfolders = docs.filter((d) => d.id.includes('/'));
+
+// Group sub-folder docs
+const byFolder: Record<string, typeof docs> = {};
+for (const d of subfolders) {
+  const folder = d.id.split('/')[0];
+  if (!byFolder[folder]) byFolder[folder] = [];
+  byFolder[folder].push(d);
+}
+
+function deriveTitle(slug: string, body: string | undefined) {
+  const h1 = body?.match(/^#\s+(.+)$/m)?.[1];
+  if (h1) return h1.trim();
+  return slug.split('/').pop()!.replace(/\.md$/, '').replace(/^\d+-/, '').replace(/-/g, ' ');
+}
+
+const ordered = topLevel.slice().sort((a, b) => {
+  if (a.id.toLowerCase().includes('readme')) return -1;
+  if (b.id.toLowerCase().includes('readme')) return 1;
+  const aNum = parseInt(a.id.match(/^(\d+)/)?.[1] ?? '999', 10);
+  const bNum = parseInt(b.id.match(/^(\d+)/)?.[1] ?? '999', 10);
+  return aNum - bNum;
+});
+
+const folderOrder = ['whitepaper-foundations', 'primary-sources', 'context', 'external', 'code-walk', 'fractal-deep'];
+const sortedFolders = Object.keys(byFolder).sort((a, b) => {
+  const aI = folderOrder.indexOf(a);
+  const bI = folderOrder.indexOf(b);
+  if (aI === -1 && bI === -1) return a.localeCompare(b);
+  if (aI === -1) return 1;
+  if (bI === -1) return -1;
+  return aI - bI;
+});
+---
+<BaseLayout title="Research">
+  <h1>Research</h1>
+  <p class="muted">
+    DEEP-tier research: theory, mechanism, ORDAO contracts, communities, music-fractal,
+    async + identity, code-walks, the magnum-opus whitepaper foundations, every fractal
+    end to end, and the full Optimystics tool catalog. {docs.length} files, 500+ unique sources.
+  </p>
+
+  <h2 class="tag-orange">Top-level hub docs</h2>
+  <div class="doc-grid">
+    {ordered.map((doc) => {
+      const title = deriveTitle(doc.id, doc.body);
+      const href = `/research/${doc.id.replace(/\.md$/, '')}`;
+      const fm: any = (doc as any).data ?? {};
+      const tier = fm.tier ?? '';
+      return (
+        <div class="doc-card">
+          <a href={href}>
+            <div class="title">{title}</div>
+            <div class="meta">{doc.id}{tier ? ` - ${tier}` : ''}</div>
+          </a>
+        </div>
+      );
+    })}
+  </div>
+
+  {sortedFolders.map((folder) => (
+    <section>
+      <h2 class="tag-cyan">{folder}/</h2>
+      <div class="doc-grid">
+        {byFolder[folder].sort((a, b) => a.id.localeCompare(b.id)).map((doc) => {
+          const title = deriveTitle(doc.id, doc.body);
+          const href = `/research/${doc.id.replace(/\.md$/, '')}`;
+          return (
+            <div class="doc-card">
+              <a href={href}>
+                <div class="title">{title}</div>
+                <div class="meta">{doc.id}</div>
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  ))}
+</BaseLayout>

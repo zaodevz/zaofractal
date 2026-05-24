@@ -1,0 +1,59 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  collection: 'reference' | 'research' | 'whitepaper';
+  slug: string;
+  frontmatter?: Record<string, any>;
+}
+
+const { title, collection, slug, frontmatter = {} } = Astro.props;
+
+// Surface the most useful frontmatter fields as pills (if present)
+const pillFields = ['topic', 'type', 'tier', 'status', 'last-validated'];
+const pills = pillFields
+  .map((k) => ({ k, v: frontmatter[k] }))
+  .filter((p) => p.v != null && p.v !== '');
+
+const backHref = `/${collection}`;
+const backLabel = collection.charAt(0).toUpperCase() + collection.slice(1);
+const repoPath = `https://github.com/ZAODEVZ/ZAOfractal/blob/main/${collection}/${slug}.md`;
+---
+<BaseLayout title={title}>
+  <div class="back">
+    <a href={backHref}>&larr; {backLabel}</a>
+    <a href={repoPath} class="repo-link">View source on GitHub</a>
+  </div>
+
+  {pills.length > 0 && (
+    <div class="fm-pills">
+      {pills.map((p) => (
+        <span class={`fm-pill ${p.k === 'tier' ? 'tier-' + p.v : ''}`}>
+          <span class="k">{p.k}:</span><span class="v">{p.v}</span>
+        </span>
+      ))}
+    </div>
+  )}
+
+  <article>
+    <slot />
+  </article>
+</BaseLayout>
+
+<style>
+  .back {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  .back a { font-weight: 500; }
+  .repo-link {
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.8rem;
+  }
+</style>

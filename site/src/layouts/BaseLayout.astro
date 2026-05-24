@@ -1,0 +1,35 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'ZAO Fractal - the weekly Respect Game, ORDAO governance, and the lineage of fractal democracy.' } = Astro.props;
+const fullTitle = title === 'ZAOfractal' ? title : `${title} - ZAOfractal`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).toString()} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>{fullTitle}</title>
+</head>
+<body>
+  <Nav />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

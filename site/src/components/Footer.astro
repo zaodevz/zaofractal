@@ -1,0 +1,42 @@
+---
+---
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-row">
+      <span>
+        ZAOfractal documentation. The weekly Respect Game has run unbroken since around August 2024.
+      </span>
+      <span class="dim">Built with Astro from the canonical Markdown source.</span>
+    </div>
+    <div class="footer-row links">
+      <a href="https://github.com/ZAODEVZ/ZAOfractal">Repo</a>
+      <a href="/resources">All resources</a>
+      <a href="https://thezao.com">The ZAO</a>
+      <a href="https://bettercallzaal.com">BetterCallZaal</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg-elev);
+    padding: 2rem 0;
+    margin-top: 4rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .footer-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+  .footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    align-items: baseline;
+  }
+  .footer-row + .footer-row { margin-top: 0.75rem; }
+  .links a { font-weight: 500; }
+</style>

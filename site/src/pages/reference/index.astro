@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const docs = await getCollection('reference');
+
+// Order: README first, then numbered docs, then anything else
+const ordered = docs.slice().sort((a, b) => {
+  const aSlug = a.id;
+  const bSlug = b.id;
+  if (aSlug.toLowerCase().includes('readme')) return -1;
+  if (bSlug.toLowerCase().includes('readme')) return 1;
+  const aNum = parseInt(aSlug.match(/^(\d+)/)?.[1] ?? '999', 10);
+  const bNum = parseInt(bSlug.match(/^(\d+)/)?.[1] ?? '999', 10);
+  return aNum - bNum;
+});
+
+function deriveTitle(slug: string, body: string | undefined) {
+  // Try the first H1 from body
+  const h1 = body?.match(/^#\s+(.+)$/m)?.[1];
+  if (h1) return h1.trim();
+  // Fall back to slug-derived
+  return slug.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}
+---
+<BaseLayout title="Reference">
+  <h1>Reference</h1>
+  <p class="muted">
+    Shallow survey of every fractal that has ever existed: Larimer, Fractally, Eden,
+    Optimism Fractal, Roy, Aquadac, and the wider ecosystem. {docs.length} files.
+    Each is a short standalone reference. Start at the
+    <a href="/reference/README">README</a>.
+  </p>
+
+  <div class="doc-grid">
+    {ordered.map((doc) => {
+      const title = deriveTitle(doc.id, doc.body);
+      const href = `/reference/${doc.id.replace(/\.md$/, '')}`;
+      return (
+        <div class="doc-card">
+          <a href={href}>
+            <div class="title">{title}</div>
+            <div class="meta">{doc.id}</div>
+          </a>
+        </div>
+      );
+    })}
+  </div>
+</BaseLayout>
