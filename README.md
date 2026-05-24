@@ -13,12 +13,19 @@ The idea was formalized by Daniel Larimer in *More Equal Animals* (Feb 20, 2021)
 ```
 ZAOfractal/
   README.md                  - this file
-  reference/                 - everything else that has ever been called a fractal
+  reference/                 - shallow survey: every fractal that has ever existed
                                (Larimer, Fractally, Eden, Optimism, Roy, Aquadac, etc.)
-                               read this before writing anything new about ZAO Fractal
+                               16 files, ~1300 lines. Start here.
+  research/                  - DEEP-tier: 6 hub docs + 4 sub-folders
+                               (whitepaper-foundations/, primary-sources/,
+                                context/, external/, code-walk/)
+                               25+ files, ~10500 lines, 320+ unique sources.
+  whitepaper/                - The magnum opus governance document
+                               draft/ contains Ch.1-3 v0.1 (8200 words)
+                               Ch.4-11 still to come.
 ```
 
-The `reference/` folder is the canonical map of the fractal-governance lineage ZAO sits inside. Each file is a short, standalone reference doc. Start at [reference/README.md](reference/README.md).
+Start at [reference/README.md](reference/README.md) for the survey. Move to [research/README.md](research/README.md) when you need depth. The [whitepaper/README.md](whitepaper/README.md) tracks magnum-opus progress.
 
 ## Live ZAO Fractal facts (as of May 2026)
 
@@ -34,7 +41,14 @@ The `reference/` folder is the canonical map of the fractal-governance lineage Z
 | Submission UI | `zao.frapps.xyz/submitBreakout` |
 | OREC transactions | 242+ as of May 21, 2026 |
 
-ZAO Fractal-specific operational docs (whitepaper, contract specs, bot internals, dashboard rebuild) are forthcoming in this repo. The `reference/` folder is the foundation they will be written against.
+Operational docs that already exist:
+
+- The whitepaper itself (Ch.1-3 first drafts) - [whitepaper/draft/](whitepaper/draft/)
+- The bot internals walkthrough - [research/code-walk/01-fractalbot-walkthrough.md](research/code-walk/01-fractalbot-walkthrough.md)
+- The ORDAO Solidity walkthrough - [research/code-walk/02-ordao-contracts-walkthrough.md](research/code-walk/02-ordao-contracts-walkthrough.md)
+- Frapp-GH (async GitHub-native fractal) full PRD, build-ready - [research/06-frapp-gh-prd.md](research/06-frapp-gh-prd.md)
+
+Still to come: dashboard rebuild spec, OG-to-ZOR ledger reconciliation, signer-committee proposal for the 2-wallet OREC bottleneck.
 
 ## License
 

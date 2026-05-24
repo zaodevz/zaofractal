@@ -37,9 +37,14 @@ The DEEP-tier research layer for the ZAO Fractal repo. Where `/reference/` is th
   external/                              cross-cutting deep research
     INDEX.md
     fractal-governance-external-deep-research.md  beyond ZAO's immediate lineage
+
+  code-walk/                             annotated walkthroughs of running code
+    INDEX.md
+    01-fractalbot-walkthrough.md         the Discord bot (52 commands, Python)
+    02-ordao-contracts-walkthrough.md    OREC + Respect1155 Solidity + orclient SDK
 ```
 
-## Top-level hub docs (01-04)
+## Top-level hub docs (01-06)
 
 | # | File | Topic | Lines | Sources |
 |---|------|-------|-------|---------|
@@ -47,6 +52,8 @@ The DEEP-tier research layer for the ZAO Fractal repo. Where `/reference/` is th
 | 02 | [02-live-communities-deep.md](02-live-communities-deep.md) | Roy Fractal at 700+ scale, Eden Fractal Epoch 2, Aquadac 12-week season, Optimism Fractal pause autopsy | ~400 | 10 |
 | 03 | [03-music-cignals-deep.md](03-music-cignals-deep.md) | Cignals, Fractal DJ, music DAOs that tried peer-ranked governance, what changes if ZAO ranks tracks | ~530 | 20 |
 | 04 | [04-async-identity-deep.md](04-async-identity-deep.md) | Respect.Games, Fractal Circles revival, Frapp-GH spec, identity interop landscape | ~780 | 12 |
+| 05 | [05-targeted-gap-fillers.md](05-targeted-gap-fillers.md) | Targeted fills for 3 UNKNOWNs: Roy Fractal founder (Shakruz Azirof) + facilitation, Mikael/Fractal Circles dormancy, Aquadac season themes | ~600 | 21 |
+| 06 | [06-frapp-gh-prd.md](06-frapp-gh-prd.md) | Full Product Requirements Document for Frapp-GH (GitHub-native async fractal) - build-ready spec, ~3-5 sprint days for Phase 1 MVP | ~1350 | 18 |
 
 ## Sub-folders
 
@@ -56,8 +63,9 @@ The DEEP-tier research layer for the ZAO Fractal repo. Where `/reference/` is th
 | `primary-sources/` | The canonical ORDAO + Respect mechanics specs (the original DEEP docs every other doc traces back to) | Implementing or reviewing contract behavior |
 | `context/` | Adjacent governance frames (Superchain cross-chain, sociocracy circles, plural events) | Writing the comparative chapter or designing sprint adaptations |
 | `external/` | Cross-cutting external research, sources beyond the immediate ZAO lineage | Literature reviews, breadth checks |
+| `code-walk/` | Annotated walkthroughs of the Discord bot and ORDAO Solidity contracts | Engineering onboarding, security review, fork or extension work |
 
-Total in `/research/`: ~6500 lines, 250+ unique sources.
+Total in `/research/`: ~10500 lines, 320+ unique sources. Plus `/whitepaper/draft/` (Ch.1-3 first drafts, ~8200 words) - see [whitepaper/README.md](../whitepaper/README.md).
 
 ## How to navigate
 
