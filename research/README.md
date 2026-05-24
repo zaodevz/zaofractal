@@ -49,6 +49,9 @@ The DEEP-tier research layer for the ZAO Fractal repo. Where `/reference/` is th
     02-eden-fractal-full-history.md      Eden on EOS through Epoch 2 Base
     03-optimism-fractal-full-history.md  Oct 2023 launch through Jan 2026 pause
     04-optimystics-tools-survey.md       full Optimystics tool catalog with ZAO verdicts
+    05-other-fractal-communities.md      Roy/Hispano/Alien Worlds/Aquadac/EOS Respect/ZEOS/Eden Korea/Upland/Upscale/Dynamics of Hegemony
+    06-adjacent-governance-tooling.md    Hats Protocol, Snapshot, Pol.is, Loomio, Decidim, Consul, Sociocracy 3.0, Safe, Tally, Aragon OSx
+    07-larimer-essays-academic-bibliography.md  Larimer essay archive + deeper academic bibliography (Fishkin, Landemore, Habermas, Ostrom, etc.)
 ```
 
 ## Top-level hub docs (01-06)

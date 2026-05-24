@@ -12,6 +12,9 @@ Wave 4 research (May 24, 2026). ~2530 lines, 100+ unique sources.
 | 02 | [02-eden-fractal-full-history.md](02-eden-fractal-full-history.md) | Eden Fractal end to end: Eden on EOS (April 2021), Genesis Fractal (2022), Epoch 1 EOS (May 2022-June 2025), Epoch 1.5 false start (Aug 2024), Epoch 2 Base (June 5 2025-present) | 622 | 18 |
 | 03 | [03-optimism-fractal-full-history.md](03-optimism-fractal-full-history.md) | Optimism Fractal end to end: Oct 2023 launch through Jan 2026 indefinite pause autopsy. Tripartite governance (Sages Council), ORDAO Season 5 production deployment (Nov 2024), grants, the 5 ranked causes of the pause | 644 | 27 |
 | 04 | [04-optimystics-tools-survey.md](04-optimystics-tools-survey.md) | Complete catalog of Optimystics tools: ORDAO, Fractalgram, Respect.Games, Fractal Circles, Cignals, Cagendas, OPTOPICS, Respect Trees, RetroPolls, Firmament. Each with status + ZAO verdict (USE / PILOT / IGNORE / ABANDON) | 673 | 24 |
+| 05 | [05-other-fractal-communities.md](05-other-fractal-communities.md) | DEEP profiles of every fractal community OTHER than ZAO/Eden/OF: Roy, Hispano, Alien Worlds, Aquadac, EOS Respect, ZEOS, Eden Korea, Upland, Upscale, Dynamics of Hegemony | 975 | 25 |
+| 06 | [06-adjacent-governance-tooling.md](06-adjacent-governance-tooling.md) | DEEP coverage of governance tools adjacent to ORDAO that ZAO should understand: Hats Protocol, Snapshot, Pol.is, Loomio, Decidim, Consul, Sociocracy 3.0, Safe, Tally, Aragon OSx | 548 | 31 |
+| 07 | [07-larimer-essays-academic-bibliography.md](07-larimer-essays-academic-bibliography.md) | Larimer essay archive (More Equal Animals + Decentralizing Governance 2019 + The Currency Distribution Problem 2016 + Fractally writings) + deeper academic bibliography (Fishkin, Landemore, Habermas, Sintomer, Mercier+Sperber, Haidt, Sunstein, Ostrom, Surowiecki, Manin, Navajas) + sortition history deeper | 944 | 24 |
 
 ## Key facts surfaced
 
@@ -67,11 +70,19 @@ Wave 4 research (May 24, 2026). ~2530 lines, 100+ unique sources.
 
 These docs supersede the shallow passes in `/reference/02-fractally-protocol.md`, `/reference/03-eden-on-eos.md`, `/reference/05-eden-fractal.md`, `/reference/06-optimism-fractal.md`. The reference docs remain as the 1-2 minute overview; the deep-history docs are the 20-30 minute read.
 
-## Honest UNKNOWNs after wave 4
+## Wave 5 additions - new founder/leader names surfaced
+
+- **Roy Fractal (EOS, 700+)** - founder confirmed: **Shakruz Azirof**. Facilitation uses multi-platform (YouTube archive + Telegram async + Zoom realtime). Nested breakout rooms.
+- **Fractal Hispano** - founder: **Jorge Ramos**. 25+ members, 30+ meetings.
+- **EOS Respect** - founder: **Randall Roland**. Dozens of members, monthly elections.
+- **Upland Fractal** - founder: **Spacewrangler Joe**. 10 core members governing the Upland metaverse real-estate game.
+- **ZEOS Fractal** - founder: **Matthias** (likely Matthias Schoenebeck of "Pseudonymous Fractals" Medium fame). Status partial.
+
+## Honest UNKNOWNs after wave 5
 
 | Topic | What is still unknown | Next step |
 |-------|----------------------|-----------|
-| Fractally | Last commit / repo URL / Larimer's stated reason for stopping | Search archives more aggressively, ask community |
+| Fractally | Last commit / repo URL / Larimer's stated reason for stopping | Search Hive/Steemit archives more aggressively, ask Larimer directly |
 | Eden | Exact May 2022 founding date, ORDAO exact deploy date | Reach @DanSingjoy for confirmation |
 | Eden | EOS-to-Base claim rates (of 77 holders) | BaseScan analysis of claim transactions |
 | OF | Exact vote tally on Jan 2026 pause | Optimism Foundation forum thread or council post |
@@ -79,5 +90,11 @@ These docs supersede the shallow passes in `/reference/02-fractally-protocol.md`
 | OF | Post-pause migration path for OF Respect holders | Optimism Fractal council post or DM SingJoy |
 | Optimystics tools | Fractal Circles source code repo URL | Contact Mikael (currently unreachable per ZAO research) |
 | Optimystics tools | Cignals on-chain version ship date | Contact Tadas (sim31) directly |
+| Other fractals | Upscale Fractal founder + launch date + cadence (Sub A marked FAILED) | Optimystics directory direct outreach |
+| Other fractals | Dynamics of Hegemony game status + developer | Site offline; try Wayback Machine + Steam |
+| Other fractals | Aquadac complete season-theme rotation | Email Aquarius Academy Substack or join a season |
+| Larimer essays | Hive/Steemit 2017-2019 specific URLs | Hive archive crawl (e.g. ecency.com, peakd.com) |
+| Larimer essays | Whether post-2022 Larimer governance writing exists | Direct outreach |
+| More Equal Animals | Exact chapter table of contents | Amazon Look Inside, Goodreads, library copy |
 
-These are the targets for any wave 5 research.
+These remain targets for any wave 6 research.
