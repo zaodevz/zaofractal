@@ -4,12 +4,12 @@ import MobileNav from './MobileNav.astro';
 const { pathname } = Astro.url;
 const isActive = (p: string) => pathname === p || pathname.startsWith(p + '/');
 const links = [
-  { href: '/reference', label: 'Reference' },
-  { href: '/research', label: 'Research' },
   { href: '/whitepaper', label: 'Whitepaper' },
+  { href: '/research', label: 'Research' },
+  { href: '/reference', label: 'Reference' },
   { href: '/lineage', label: 'Lineage' },
   { href: '/people', label: 'People' },
-  { href: '/resources', label: 'Resources' },
+  { href: '/bibliography', label: 'Bibliography' },
 ];
 ---
 <header class="site-nav">

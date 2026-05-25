@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import DocLayout from '../../layouts/DocLayout.astro';
+import ChapterHero from '../../components/ChapterHero.astro';
 
 export async function getStaticPaths() {
   const deriveTitle = (slug: string, body: string | undefined): string => {
@@ -40,15 +41,20 @@ const fm: any = (doc as any).data ?? {};
 
 const h1 = doc.body?.match(/^#\s+(.+)$/m)?.[1];
 const title = h1 ?? doc.id;
+const isChapter = /^Chapter\s+\d+/i.test(title);
+const slug = doc.id.replace(/\.md$/, '');
+const isDraftChapter = isChapter && slug.startsWith('draft/');
 ---
 <DocLayout
   title={title}
   collection="whitepaper"
-  slug={doc.id.replace(/\.md$/, '')}
+  slug={slug}
   frontmatter={fm}
   headings={headings}
   prev={prev}
   next={next}
+  hideArticleTitle={isDraftChapter}
 >
+  {isDraftChapter && <ChapterHero title={title} />}
   <Content />
 </DocLayout>

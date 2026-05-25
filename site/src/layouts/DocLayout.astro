@@ -22,6 +22,7 @@ interface Props {
   headings?: MarkdownHeading[];
   prev?: NavLink | null;
   next?: NavLink | null;
+  hideArticleTitle?: boolean;
 }
 
 const {
@@ -32,6 +33,7 @@ const {
   headings = [],
   prev = null,
   next = null,
+  hideArticleTitle = false,
 } = Astro.props;
 
 const pillFields = ['topic', 'type', 'tier', 'status', 'last-validated'];
@@ -68,7 +70,7 @@ const showReadProgress = collection === 'whitepaper' && slug.startsWith('draft/'
 
       <ShareBar title={title} url={pageUrl} />
 
-      <article>
+      <article class={hideArticleTitle ? 'hide-article-h1' : ''}>
         <slot />
       </article>
 

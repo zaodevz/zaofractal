@@ -1,20 +1,28 @@
-/* ZAOfractal site - BCZ-style dark theme */
+/* ZAOfractal site - D3 Native: academic-press / archival
+ * Warm-dark palette (plum-tinted, not blue) + serif body for long-form prose.
+ * Syne 800 headings (kept), Spectral body (new), Outfit chrome (kept), JetBrains Mono code.
+ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
-  --bg: #0a0a1a;
-  --bg-elev: #12122a;
-  --bg-card: #1a1a35;
-  --text: #f5f5f7;
-  --text-muted: #b8b8c8;
-  --text-dim: #7a7a90;
-  --orange: #ff6b1a;
-  --cyan: #00d4ff;
-  --gold: #ffc93c;
-  --border: #2a2a45;
+  /* Warm-dark base */
+  --bg: #0F0E16;
+  --bg-elev: #1A1822;
+  --bg-card: #221F2D;
+  --text: #F0EDE6;
+  --text-muted: #B8B0A5;
+  --text-dim: #877E73;
+  /* Brand accents - slightly deeper / matte to match archival feel */
+  --orange: #E55611;
+  --cyan: #5B86A8;
+  --gold: #D4A23A;
+  --magenta: #C44784;
+  --border: #2A2630;
+  --rule: #3A3540;
   --radius: 8px;
   --max-w: 880px;
+  --read-col: 720px;
 }
 
 * {
@@ -30,6 +38,20 @@ html {
   font-weight: 300;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Long-form prose uses Spectral. The .doc-main article inside DocLayout gets
+ * this treatment; index pages + chrome stay in Outfit. */
+article {
+  font-family: 'Spectral', 'Iowan Old Style', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+article p { margin: 0 0 1.15rem; }
+article p:has(+ p:first-letter) {
+  /* placeholder - real drop cap rule below */
 }
 
 body {
@@ -54,10 +76,28 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
-h1 { font-size: 2.25rem; margin: 0 0 1.5rem; color: var(--orange); }
-h2 { font-size: 1.6rem; margin: 2.25rem 0 1rem; color: var(--cyan); }
-h3 { font-size: 1.25rem; margin: 1.75rem 0 0.75rem; color: var(--gold); }
-h4 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+h1 { font-size: 2.5rem; margin: 0 0 1.5rem; color: var(--orange); }
+h2 { font-size: 1.6rem; margin: 2.5rem 0 1rem; color: var(--gold); }
+h3 { font-size: 1.2rem; margin: 1.75rem 0 0.75rem; color: var(--cyan); }
+h4 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; color: var(--text); }
+
+/* Drop cap: first letter of the first <p> AFTER the first H2 inside an article.
+ * Targets body prose, not the thesis pull-quote. CSS-only. */
+article h2:first-of-type + p::first-letter {
+  font-family: 'Syne', serif;
+  font-weight: 800;
+  font-size: 3.5rem;
+  float: left;
+  line-height: 0.95;
+  padding: 0.35rem 0.5rem 0 0;
+  color: var(--orange);
+}
+
+/* When ChapterHero is rendered, hide the H1 inside the Markdown article body
+ * (the chapter header is already shown by ChapterHero). */
+article.hide-article-h1 > h1:first-child {
+  display: none;
+}
 
 p, ul, ol, blockquote, table { margin: 0 0 1rem; }
 
@@ -72,13 +112,36 @@ a:hover { color: var(--gold); border-bottom-color: var(--gold); }
 ul, ol { padding-left: 1.5rem; }
 li { margin-bottom: 0.25rem; }
 
+/* Blockquote = pull-quote, archival style.
+ * Spectral italic, thin gold rules above + below, no background fill,
+ * generous padding, used inline in article body. */
 blockquote {
-  border-left: 3px solid var(--orange);
-  padding: 0.5rem 1rem;
-  background: var(--bg-elev);
-  color: var(--text-muted);
+  font-family: 'Spectral', Georgia, serif;
   font-style: italic;
-  border-radius: 0 var(--radius) var(--radius) 0;
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--text);
+  border: none;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  margin: 2rem 0;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border-radius: 0;
+  text-align: center;
+}
+blockquote p { margin: 0; }
+blockquote p + p { margin-top: 0.5rem; }
+blockquote em, blockquote cite {
+  font-style: normal;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-top: 0.75rem;
 }
 
 code {

@@ -1,0 +1,71 @@
+---
+// Stripe Press / Penguin Classics-style chapter opener.
+// Used only on whitepaper/draft/* pages where the first H1 matches "Chapter NN: ...".
+// Renders a giant chapter number + italic title.
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+// Parse "Chapter 4: The Respect Token" -> { num: "04", body: "The Respect Token" }
+const m = title.match(/^Chapter\s+(\d+)\s*[-:]\s*(.+)$/i);
+const num = m ? m[1].padStart(2, '0') : null;
+const body = m ? m[2].trim() : title;
+---
+{num && (
+  <header class="chapter-hero">
+    <div class="ch-num" aria-hidden="true">{num}</div>
+    <div class="ch-meta">
+      <div class="ch-label">Chapter</div>
+      <h1 class="ch-title">{body}</h1>
+    </div>
+  </header>
+)}
+
+<style>
+  .chapter-hero {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin: 1rem 0 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ch-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(5rem, 12vw, 8rem);
+    line-height: 0.85;
+    color: var(--orange);
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .ch-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .ch-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .ch-title {
+    font-family: 'Spectral', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    line-height: 1.15;
+    color: var(--text);
+    margin: 0;
+  }
+  @media (max-width: 600px) {
+    .chapter-hero { gap: 1rem; padding-bottom: 1.5rem; }
+    .ch-num { font-size: 4.5rem; }
+  }
+</style>

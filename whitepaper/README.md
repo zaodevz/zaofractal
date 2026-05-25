@@ -1,6 +1,6 @@
 # The ZAO Fractal Whitepaper
 
-**Status:** Drafting (Chapters 1-3 complete, Chapters 4-11 pending)
+**Status:** All 11 chapters drafted (v0.1) - 28,529 words total
 
 **Version:** v0.1 - awaiting Zaal review
 
@@ -18,17 +18,19 @@ The whitepaper is hybrid manifesto-specification: it makes the case for earned g
 
 | # | Title | Voice | Status | Word Count |
 |---|-------|-------|--------|-----------|
-| 1 | Preamble and Vision | Manifesto | Draft v0.1 | 1,748 |
-| 2 | The Problem - why current DAO governance fails | Manifesto + Argument | Draft v0.1 | 2,148 |
-| 3 | Fractal Democracy: First Principles | Argument + Precision | Draft v0.1 | 2,691 |
-| 4 | The Respect Token - soulbound reputation | Precision | Pending | - |
-| 5 | The Respect Game - the weekly mechanism | Precision | Pending | - |
-| 6 | On-Chain Architecture - ORDAO, OREC | Precision | Pending | - |
-| 7 | Why Fractal - comparative case | Argument | Pending | - |
-| 8 | The ZAO Fractal - specific story | Manifesto + Narrative | Pending | - |
-| 9 | Limitations and Open Problems | Plain Honesty | Pending | - |
-| 10 | Roadmap | Plain | Pending | - |
-| 11 | Conclusion - "new governance culture" | Manifesto | Pending | - |
+| 1 | Preamble and Vision | Manifesto | Draft v0.1 | 2,458 |
+| 2 | The Problem - why current DAO governance fails | Manifesto + Argument | Draft v0.1 | 2,434 |
+| 3 | Fractal Democracy: First Principles | Argument + Precision | Draft v0.1 | 3,348 |
+| 4 | The Respect Token - soulbound reputation | Precision | Draft v0.1 | 2,283 |
+| 5 | The Respect Game - the weekly mechanism | Precision | Draft v0.1 | 3,238 |
+| 6 | On-Chain Architecture - ORDAO, OREC | Precision | Draft v0.1 | 2,951 |
+| 7 | Why Fractal - comparative case | Argument | Draft v0.1 | 4,002 |
+| 8 | The ZAO Fractal - specific story | Manifesto + Narrative | Draft v0.1 | 2,701 |
+| 9 | Limitations and Open Problems | Plain Honesty | Draft v0.1 | 2,117 |
+| 10 | Roadmap | Plain | Draft v0.1 | 1,578 |
+| 11 | Conclusion - "new governance culture" | Manifesto | Draft v0.1 | 1,419 |
+
+**Total: 28,529 words.**
 
 ---
 
@@ -149,6 +151,6 @@ Chapters 4-11 will be drafted in sequence, following the same research-to-draft 
 
 ---
 
-**Last updated:** 2026-05-24
+**Last updated:** 2026-05-25 - all 11 chapters drafted, brand-cleaned, deployed.
 
 **For questions:** Contact Zaal (zaalp99@gmail.com)

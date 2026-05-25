@@ -6,11 +6,12 @@ const { pathname } = Astro.url;
 const isActive = (p: string) => pathname === p || pathname.startsWith(p + '/');
 const links = [
   { href: '/', label: 'Home' },
-  { href: '/reference', label: 'Reference' },
-  { href: '/research', label: 'Research' },
   { href: '/whitepaper', label: 'Whitepaper' },
+  { href: '/research', label: 'Research' },
+  { href: '/reference', label: 'Reference' },
   { href: '/lineage', label: 'Lineage' },
   { href: '/people', label: 'People' },
+  { href: '/bibliography', label: 'Bibliography' },
   { href: '/resources', label: 'Resources' },
 ];
 ---
