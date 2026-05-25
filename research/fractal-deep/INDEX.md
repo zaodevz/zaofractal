@@ -15,6 +15,7 @@ Wave 4 research (May 24, 2026). ~2530 lines, 100+ unique sources.
 | 05 | [05-other-fractal-communities.md](05-other-fractal-communities.md) | DEEP profiles of every fractal community OTHER than ZAO/Eden/OF: Roy, Hispano, Alien Worlds, Aquadac, EOS Respect, ZEOS, Eden Korea, Upland, Upscale, Dynamics of Hegemony | 975 | 25 |
 | 06 | [06-adjacent-governance-tooling.md](06-adjacent-governance-tooling.md) | DEEP coverage of governance tools adjacent to ORDAO that ZAO should understand: Hats Protocol, Snapshot, Pol.is, Loomio, Decidim, Consul, Sociocracy 3.0, Safe, Tally, Aragon OSx | 548 | 31 |
 | 07 | [07-larimer-essays-academic-bibliography.md](07-larimer-essays-academic-bibliography.md) | Larimer essay archive (More Equal Animals + Decentralizing Governance 2019 + The Currency Distribution Problem 2016 + Fractally writings) + deeper academic bibliography (Fishkin, Landemore, Habermas, Sintomer, Mercier+Sperber, Haidt, Sunstein, Ostrom, Surowiecki, Manin, Navajas) + sortition history deeper | 944 | 24 |
+| 08 | [08-eden-creators-garden-inventory.md](08-eden-creators-garden-inventory.md) | Full inventory of the Eden Creators Garden (edencreators.com/garden) - 30+ tools / games / initiatives in Optimystics ecosystem. Surfaces the experimental layer beyond shipped Optimystics code: DAMS, EFBS, Consortium, Vlalendas, Pomelo, BBS, Eden Research, ARC, and 20+ more. | 250 | 6 |
 
 ## Key facts surfaced
 

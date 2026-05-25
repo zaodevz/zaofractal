@@ -176,6 +176,40 @@ Last updated: 2026-05-24.
 
 [github.com/Optimystics](https://github.com/Optimystics) - 16 repos including all of the above plus `op-fractal-sc` (OF Solidity contracts: [Optimystics/op-fractal-sc](https://github.com/Optimystics/op-fractal-sc)) and `OptimismFractal.com` ([source](https://github.com/Optimystics/OptimismFractal.com)).
 
+### Eden Creators Garden (the experimental layer)
+
+The [edencreators.com/garden](https://edencreators.com/garden) page is Dan SingJoy + the Eden community's "fractal, iterative blog" - a hub linking 30+ draft articles about Eden Fractal experiments and Optimystics projects. Many entries are DRAFT or CONCEPT status; see [research/fractal-deep/08-eden-creators-garden-inventory.md](research/fractal-deep/08-eden-creators-garden-inventory.md) for full inventory + ZAO actions.
+
+Highlights NOT covered in the Optimystics tool catalog above:
+
+| Entry | URL | What it is | Status |
+|-------|-----|------------|--------|
+| **DAMS (Decentralized Autonomous Movie Studios)** | [edencreators.com/dams](https://edencreators.com/dams) | Community-video-production model | DRAFT |
+| **Eden Research** | [edencreators.com/research](https://edencreators.com/research) | Roam/Athens/Obsidian/logseq-style note-taking on EOS | DRAFT |
+| **Eden Talk** | [edencreators.com/talk](https://edencreators.com/talk) | Web3 community forum | DRAFT |
+| **Pitches (Pitch Sessions)** | [edencreators.com/pitches](https://edencreators.com/pitches) | Recurring event for public-goods pitches | DRAFT |
+| **Speeches** | [edencreators.com/speeches](https://edencreators.com/speeches) | Social game ranking speeches | DRAFT |
+| **Consortium** | [edencreators.com/consortium](https://edencreators.com/consortium) | Voting / opinion-signaling app | DRAFT |
+| **Eden + Fractal** | [edencreators.com/edenplusfractal](https://edencreators.com/edenplusfractal) | Original consensus game (likely upstream of Respect Game) | DRAFT |
+| **EFBS** | [edencreators.com/brainstorming](https://edencreators.com/brainstorming) | Eden Fractal Brainstorming Sessions - biweekly meta-meeting | DRAFT |
+| **MSIG** | [edencreators.com/msig](https://edencreators.com/msig) | Multisig config for eden.fractal EOS account, 10+ proposals | DRAFT |
+| **Vlalendas** | [edencreators.com/vlalendas](https://edencreators.com/vlalendas) | Cagendas variant for time allocation | DRAFT |
+| **Agendas** | [edencreators.com/agendas](https://edencreators.com/agendas) | Conceptual umbrella over agenda tools | DRAFT |
+| **Pomelo** | [edencreators.com/pomelo](https://edencreators.com/pomelo) | EOS-native crowdfunding multiplier | LIVE |
+| **Albedo** | [edencreators.com/albedo](https://edencreators.com/albedo) | Research initiative | DRAFT |
+| **BBS** | [edencreators.com/bbs](https://edencreators.com/bbs) | Web3 message boards, give+earn Respect for posts | DRAFT |
+| **ARC** | [edencreators.com/arc](https://edencreators.com/arc) | Alliance for Responsible Citizenship synergies | DRAFT |
+| **Renaissance** | [edencreators.com/renaissance](https://edencreators.com/renaissance) | Vision: EOS + HitRecord + Patreon creative renaissance | DRAFT |
+| **Independence** | [edencreators.com/independence](https://edencreators.com/independence) | Vision: how DAOs coordinate for a better future | DRAFT |
+| **Ideathons** | [edencreators.com/ideathon](https://edencreators.com/ideathon) | Innovation-competition format | DRAFT |
+| **Curating More Equal Animals** | [edencreators.com/curatingmea](https://edencreators.com/curatingmea) | Book-curation proposal | DRAFT |
+| **Fractal Forums** | [edencreators.com/fractalforums](https://edencreators.com/fractalforums) | Decision-making event format - dormant since early 2022 | DORMANT |
+| **Interim** | [edencreators.com/interim](https://edencreators.com/interim) | 2022 consensus-process documentation | DRAFT |
+| **Time** | [edencreators.com/time](https://edencreators.com/time) | Meeting-scheduling proposals | DRAFT |
+| **Consensus** | [edencreators.com/consensus](https://edencreators.com/consensus) | Consensus-process exploration | DRAFT |
+| **Eden's Mission** | [edencreators.com/mission](https://edencreators.com/mission) | Mission-defining discussion archive | DRAFT |
+| **Go Fractally!** | [edencreators.com/gofractally](https://edencreators.com/gofractally) | Larimer Fractally presentation | DRAFT |
+
 ---
 
 ## 7. ZAO Fractal Bot
