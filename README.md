@@ -1,5 +1,7 @@
 # ZAOfractal
 
+**Live site: [zaofractal.vercel.app](https://zaofractal.vercel.app)** (canonical domain `fractal.thezao.com` pending DNS).
+
 Home of **ZAO Fractal** - the weekly Respect Game that has run unbroken on Mondays at 6pm EST since around August 2024. It is the only music-focused fractal in existence, the only active fractal on Optimism, and one of two on the Ethereum Superchain.
 
 ## What is a fractal?
