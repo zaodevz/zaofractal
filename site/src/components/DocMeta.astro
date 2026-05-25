@@ -1,0 +1,93 @@
+---
+// Footer block on every doc page: surfaces last-validated date + related-docs links.
+// Reads from frontmatter; renders nothing if neither field is present.
+
+interface Props {
+  lastValidated?: string;
+  relatedDocs?: string;
+  collection: 'reference' | 'research' | 'whitepaper';
+}
+
+const { lastValidated, relatedDocs, collection } = Astro.props;
+
+// Parse "123, 145, 289" into an array of numeric strings + format as ZAO research doc refs.
+// These docs live in the ZAO OS V1 research library; link to the external repo for now.
+const relatedList: string[] = relatedDocs
+  ? relatedDocs
+      .toString()
+      .split(/[,\s]+/)
+      .map((s) => s.trim())
+      .filter((s) => /^\d+/.test(s))
+  : [];
+
+function zaoResearchUrl(num: string): string {
+  return `https://github.com/bettercallzaal/ZAOOS/tree/main/research`;
+}
+
+const show = lastValidated || relatedList.length > 0;
+---
+{show && (
+  <aside class="docmeta" aria-label="Document metadata">
+    {lastValidated && (
+      <div class="docmeta-row">
+        <span class="docmeta-label">Last validated</span>
+        <time datetime={lastValidated} class="docmeta-value">{lastValidated}</time>
+      </div>
+    )}
+    {relatedList.length > 0 && (
+      <div class="docmeta-row">
+        <span class="docmeta-label">Related ZAO research docs</span>
+        <span class="docmeta-value">
+          {relatedList.map((n, i) => (
+            <>
+              <a href={zaoResearchUrl(n)} target="_blank" rel="noopener noreferrer" class="related-doc">{n}</a>
+              {i < relatedList.length - 1 && <span class="dim">, </span>}
+            </>
+          ))}
+        </span>
+      </div>
+    )}
+  </aside>
+)}
+
+<style>
+  .docmeta {
+    margin: 2.5rem 0 1rem;
+    padding: 1rem 1.15rem;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.88rem;
+  }
+  .docmeta-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0.2rem 0;
+  }
+  .docmeta-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    min-width: 12rem;
+  }
+  .docmeta-value {
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.85rem;
+  }
+  .related-doc {
+    color: var(--cyan);
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 1px;
+  }
+  .related-doc:hover { color: var(--orange); border-bottom-color: var(--orange); }
+  @media (max-width: 600px) {
+    .docmeta-label { min-width: 100%; }
+  }
+</style>

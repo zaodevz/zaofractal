@@ -13,10 +13,17 @@ const reference = defineCollection({
 
 // Permissive coercion - YAML auto-parses dates, numbers, booleans, nulls, arrays.
 // Accept anything (any) and coerce to a display string downstream.
+// For Date values, emit YYYY-MM-DD (matching how the source MD frontmatter authored them).
 const flexString = z.any()
   .transform((v) => {
     if (v == null) return '';
-    if (Array.isArray(v)) return v.map(String).join(', ');
+    if (v instanceof Date) {
+      const yyyy = v.getUTCFullYear();
+      const mm = String(v.getUTCMonth() + 1).padStart(2, '0');
+      const dd = String(v.getUTCDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+    if (Array.isArray(v)) return v.map((x) => x instanceof Date ? x.toISOString().slice(0, 10) : String(x)).join(', ');
     return String(v);
   })
   .optional();

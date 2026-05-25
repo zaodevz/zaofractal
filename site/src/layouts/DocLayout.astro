@@ -4,6 +4,9 @@ import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import TOC from '../components/TOC.astro';
 import PrevNext from '../components/PrevNext.astro';
+import ShareBar from '../components/ShareBar.astro';
+import DocMeta from '../components/DocMeta.astro';
+import Sidebar from '../components/Sidebar.astro';
 
 interface NavLink {
   href: string;
@@ -30,16 +33,21 @@ const {
   next = null,
 } = Astro.props;
 
-// Surface the most useful frontmatter fields as pills (if present)
 const pillFields = ['topic', 'type', 'tier', 'status', 'last-validated'];
 const pills = pillFields
   .map((k) => ({ k, v: frontmatter[k] }))
   .filter((p) => p.v != null && p.v !== '');
 
 const repoPath = `https://github.com/ZAODEVZ/ZAOfractal/blob/main/${collection}/${slug}.md`;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImage = `/og/${collection}/${slug}.png`;
 ---
-<BaseLayout title={title}>
-  <div class="doc-grid">
+<BaseLayout title={title} ogImage={ogImage}>
+  <div class="doc-grid-3col">
+    <aside class="doc-sidebar-rail">
+      <Sidebar />
+    </aside>
+
     <main class="doc-main" data-pagefind-body>
       <Breadcrumbs collection={collection} slug={slug} title={title} />
 
@@ -53,9 +61,17 @@ const repoPath = `https://github.com/ZAODEVZ/ZAOfractal/blob/main/${collection}/
         </div>
       )}
 
+      <ShareBar title={title} url={pageUrl} />
+
       <article>
         <slot />
       </article>
+
+      <DocMeta
+        lastValidated={frontmatter['last-validated']}
+        relatedDocs={frontmatter['related-docs']}
+        collection={collection}
+      />
 
       <PrevNext prev={prev} next={next} />
 
@@ -71,20 +87,22 @@ const repoPath = `https://github.com/ZAODEVZ/ZAOfractal/blob/main/${collection}/
 </BaseLayout>
 
 <style>
-  /* Override BaseLayout's centered main with a 2-column grid on wide screens */
   :global(body > main) {
-    max-width: 1280px;
+    max-width: 1440px;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
   }
-  .doc-grid {
+  .doc-grid-3col {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 220px;
-    gap: 2.5rem;
+    grid-template-columns: 240px minmax(0, 1fr) 220px;
+    gap: 2rem;
     align-items: flex-start;
   }
+  .doc-sidebar-rail {
+    position: relative;
+  }
   .doc-main {
-    min-width: 0; /* allow shrinking under long code/table content */
+    min-width: 0;
     max-width: 760px;
   }
   .doc-rail {
@@ -102,7 +120,7 @@ const repoPath = `https://github.com/ZAODEVZ/ZAOfractal/blob/main/${collection}/
   }
   .source-link a:hover { color: var(--cyan); }
   @media (max-width: 1279px) {
-    .doc-grid { grid-template-columns: 1fr; }
+    .doc-grid-3col { grid-template-columns: 1fr; }
     .doc-main { max-width: 100%; }
   }
 </style>

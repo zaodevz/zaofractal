@@ -1,0 +1,34 @@
+---
+interface Node {
+  type: 'folder' | 'doc';
+  name: string;
+  href?: string;
+  children?: Node[];
+}
+
+interface Props {
+  node: Node;
+  currentPath: string;
+  depth?: number;
+  parentKey?: string;
+}
+
+const { node, currentPath, depth = 0, parentKey = '' } = Astro.props;
+const folderKey = `${parentKey}/${node.name}`;
+---
+{node.type === 'doc' ? (
+  <li>
+    <a href={node.href} class={currentPath === node.href ? 'active' : ''}>{node.name}</a>
+  </li>
+) : (
+  <li>
+    <details data-folder={folderKey} open>
+      <summary>{node.name}</summary>
+      <ul class="sb-children">
+        {(node.children ?? []).map((child) => (
+          <Astro.self node={child} currentPath={currentPath} depth={depth + 1} parentKey={folderKey} />
+        ))}
+      </ul>
+    </details>
+  </li>
+)}

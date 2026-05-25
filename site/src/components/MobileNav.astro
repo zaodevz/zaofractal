@@ -1,0 +1,181 @@
+---
+// Mobile hamburger nav - shown below 720px, hides desktop links.
+// Slide-in drawer from right with full nav + search trigger inside.
+
+const { pathname } = Astro.url;
+const isActive = (p: string) => pathname === p || pathname.startsWith(p + '/');
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/reference', label: 'Reference' },
+  { href: '/research', label: 'Research' },
+  { href: '/whitepaper', label: 'Whitepaper' },
+  { href: '/resources', label: 'Resources' },
+];
+---
+<button id="mobile-nav-trigger" class="mobile-nav-trigger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <line x1="3" y1="12" x2="21" y2="12"/>
+    <line x1="3" y1="18" x2="21" y2="18"/>
+  </svg>
+</button>
+
+<div id="mobile-nav-drawer" class="mobile-nav-drawer" aria-hidden="true">
+  <div class="mobile-nav-backdrop" data-mn-close></div>
+  <nav class="mobile-nav-panel" aria-label="Mobile navigation">
+    <button class="mobile-nav-close" data-mn-close type="button" aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <div class="mn-brand">
+      <span class="brand-z">ZAO</span><span class="brand-rest">fractal</span>
+    </div>
+    <ol class="mn-list">
+      {links.map((l) => (
+        <li><a href={l.href} class={isActive(l.href) ? 'active' : ''}>{l.label}</a></li>
+      ))}
+    </ol>
+    <div class="mn-footer">
+      <a href="https://github.com/ZAODEVZ/ZAOfractal" target="_blank" rel="noopener noreferrer">GitHub repo &rarr;</a>
+      <a href="https://thezao.com" target="_blank" rel="noopener noreferrer">The ZAO &rarr;</a>
+    </div>
+  </nav>
+</div>
+
+<script>
+  const trigger = document.getElementById('mobile-nav-trigger');
+  const drawer = document.getElementById('mobile-nav-drawer');
+
+  function open() {
+    drawer?.setAttribute('aria-hidden', 'false');
+    drawer?.classList.add('open');
+    trigger?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    drawer?.setAttribute('aria-hidden', 'true');
+    drawer?.classList.remove('open');
+    trigger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  trigger?.addEventListener('click', open);
+  drawer?.querySelectorAll('[data-mn-close]').forEach((el) => el.addEventListener('click', close));
+  // Also close when a link inside the drawer is clicked
+  drawer?.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer?.classList.contains('open')) close();
+  });
+</script>
+
+<style>
+  .mobile-nav-trigger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .mobile-nav-trigger:hover { border-color: var(--orange); color: var(--orange); }
+  .mobile-nav-drawer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+  }
+  .mobile-nav-drawer.open { display: block; }
+  .mobile-nav-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 5, 15, 0.85);
+    backdrop-filter: blur(6px);
+  }
+  .mobile-nav-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 84%;
+    max-width: 320px;
+    background: var(--bg);
+    border-left: 1px solid var(--border);
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    animation: slideIn 0.18s ease-out;
+  }
+  @keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  .mobile-nav-close {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+  .mobile-nav-close:hover { color: var(--orange); }
+  .mn-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    margin-top: 0.5rem;
+  }
+  .mn-brand .brand-z { color: var(--orange); }
+  .mn-brand .brand-rest { color: var(--cyan); }
+  .mn-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .mn-list a {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    border: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .mn-list a:hover { background: var(--bg-elev); color: var(--orange); }
+  .mn-list a.active {
+    color: var(--gold);
+    background: var(--bg-elev);
+  }
+  .mn-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+  .mn-footer a {
+    color: var(--text-muted);
+    border: none;
+  }
+  .mn-footer a:hover { color: var(--cyan); }
+  @media (max-width: 720px) {
+    .mobile-nav-trigger { display: inline-flex; }
+  }
+</style>
