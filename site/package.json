@@ -11,8 +11,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.0.0",
     "@astrojs/sitemap": "^3.2.0",
-    "marked": "^14.0.0"
+    "@shikijs/transformers": "^4.1.0",
+    "astro": "^5.0.0",
+    "astro-pagefind": "^2.0.0",
+    "hast-util-from-html": "^2.0.3",
+    "marked": "^14.0.0",
+    "pagefind": "^1.5.2",
+    "unist-util-visit": "^5.1.0"
   }
 }

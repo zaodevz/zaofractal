@@ -1,14 +1,34 @@
 ---
+import type { MarkdownHeading } from 'astro';
 import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import TOC from '../components/TOC.astro';
+import PrevNext from '../components/PrevNext.astro';
+
+interface NavLink {
+  href: string;
+  title: string;
+}
 
 interface Props {
   title: string;
   collection: 'reference' | 'research' | 'whitepaper';
   slug: string;
   frontmatter?: Record<string, any>;
+  headings?: MarkdownHeading[];
+  prev?: NavLink | null;
+  next?: NavLink | null;
 }
 
-const { title, collection, slug, frontmatter = {} } = Astro.props;
+const {
+  title,
+  collection,
+  slug,
+  frontmatter = {},
+  headings = [],
+  prev = null,
+  next = null,
+} = Astro.props;
 
 // Surface the most useful frontmatter fields as pills (if present)
 const pillFields = ['topic', 'type', 'tier', 'status', 'last-validated'];
@@ -16,44 +36,73 @@ const pills = pillFields
   .map((k) => ({ k, v: frontmatter[k] }))
   .filter((p) => p.v != null && p.v !== '');
 
-const backHref = `/${collection}`;
-const backLabel = collection.charAt(0).toUpperCase() + collection.slice(1);
 const repoPath = `https://github.com/ZAODEVZ/ZAOfractal/blob/main/${collection}/${slug}.md`;
 ---
 <BaseLayout title={title}>
-  <div class="back">
-    <a href={backHref}>&larr; {backLabel}</a>
-    <a href={repoPath} class="repo-link">View source on GitHub</a>
-  </div>
+  <div class="doc-grid">
+    <main class="doc-main" data-pagefind-body>
+      <Breadcrumbs collection={collection} slug={slug} title={title} />
 
-  {pills.length > 0 && (
-    <div class="fm-pills">
-      {pills.map((p) => (
-        <span class={`fm-pill ${p.k === 'tier' ? 'tier-' + p.v : ''}`}>
-          <span class="k">{p.k}:</span><span class="v">{p.v}</span>
-        </span>
-      ))}
+      {pills.length > 0 && (
+        <div class="fm-pills">
+          {pills.map((p) => (
+            <span class={`fm-pill ${p.k === 'tier' ? 'tier-' + p.v : ''}`}>
+              <span class="k">{p.k}:</span><span class="v">{p.v}</span>
+            </span>
+          ))}
+        </div>
+      )}
+
+      <article>
+        <slot />
+      </article>
+
+      <PrevNext prev={prev} next={next} />
+
+      <div class="source-link">
+        <a href={repoPath} rel="external">View source on GitHub &rarr;</a>
+      </div>
+    </main>
+
+    <div class="doc-rail">
+      <TOC headings={headings} />
     </div>
-  )}
-
-  <article>
-    <slot />
-  </article>
+  </div>
 </BaseLayout>
 
 <style>
-  .back {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
+  /* Override BaseLayout's centered main with a 2-column grid on wide screens */
+  :global(body > main) {
+    max-width: 1280px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
-  .back a { font-weight: 500; }
-  .repo-link {
+  .doc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+  .doc-main {
+    min-width: 0; /* allow shrinking under long code/table content */
+    max-width: 760px;
+  }
+  .doc-rail {
+    position: relative;
+  }
+  .source-link {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
     color: var(--text-dim);
+  }
+  .source-link a {
+    color: var(--text-dim);
+    border: none;
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.8rem;
+  }
+  .source-link a:hover { color: var(--cyan); }
+  @media (max-width: 1279px) {
+    .doc-grid { grid-template-columns: 1fr; }
+    .doc-main { max-width: 100%; }
   }
 </style>

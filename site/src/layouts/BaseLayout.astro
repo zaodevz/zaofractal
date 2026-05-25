@@ -31,5 +31,45 @@ const fullTitle = title === 'ZAOfractal' ? title : `${title} - ZAOfractal`;
     <slot />
   </main>
   <Footer />
+  <script>
+    // Copy-button handler for code blocks. Listens once, delegates to any .copy click.
+    document.addEventListener('click', async (e) => {
+      const btn = (e.target as Element).closest('button.copy');
+      if (!btn) return;
+      const pre = btn.parentElement;
+      if (!pre) return;
+      const code = pre.querySelector('code')?.innerText ?? pre.innerText;
+      try {
+        await navigator.clipboard.writeText(code.replace(/\n$/, ''));
+        btn.classList.add('copied');
+        btn.setAttribute('title', 'Copied!');
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.setAttribute('title', 'Copy');
+        }, 1500);
+      } catch (err) {
+        btn.setAttribute('title', 'Copy failed');
+      }
+    });
+
+    // Contract-address pills: also copy on click (in addition to opening Etherscan in new tab)
+    document.addEventListener('click', async (e) => {
+      const link = (e.target as Element).closest('a.contract-address');
+      if (!link) return;
+      if ((e as MouseEvent).altKey) {
+        // alt+click copies without navigating
+        e.preventDefault();
+        const addr = link.getAttribute('data-address');
+        if (addr) {
+          try {
+            await navigator.clipboard.writeText(addr);
+            const orig = link.getAttribute('title');
+            link.setAttribute('title', 'Copied!');
+            setTimeout(() => { if (orig) link.setAttribute('title', orig); }, 1500);
+          } catch (err) {}
+        }
+      }
+    });
+  </script>
 </body>
 </html>

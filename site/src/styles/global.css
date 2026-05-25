@@ -202,6 +202,90 @@ img { max-width: 100%; height: auto; border-radius: var(--radius); }
 .tag-cyan { color: var(--cyan); }
 .tag-gold { color: var(--gold); }
 
+/* Contract address pill (rendered by rehype-contract-addresses plugin) */
+.contract-address {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.1rem 0.55rem 0.1rem 0.65rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.85em;
+  vertical-align: baseline;
+  transition: border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.contract-address:hover {
+  border-color: var(--orange);
+  background: var(--bg-card);
+}
+.contract-address .ca-label {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.78em;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.contract-address .ca-addr {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  background: transparent !important;
+  color: var(--cyan) !important;
+  padding: 0 !important;
+  font-size: 0.95em;
+}
+.contract-address .ca-badge {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.65em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  background: rgba(255, 201, 60, 0.1);
+  padding: 0.05rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* Code block copy button - Shiki injects this via transformerCopyButton */
+.copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+  font-size: 14px;
+}
+pre:hover .copy { opacity: 1; }
+.copy:hover { color: var(--gold); }
+.copy.copied { color: var(--cyan); }
+pre.has-copy { position: relative; }
+
+/* Headings get anchor offset so anchor links land below the sticky nav */
+article h2, article h3, article h4 {
+  scroll-margin-top: 5rem;
+}
+article h2, article h3 {
+  position: relative;
+}
+article h2[id]:hover::before, article h3[id]:hover::before {
+  content: '#';
+  position: absolute;
+  left: -1.25rem;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   h1 { font-size: 1.75rem; }
@@ -210,4 +294,6 @@ img { max-width: 100%; height: auto; border-radius: var(--radius); }
   main { padding: 1.25rem 0.85rem 3rem; }
   table { font-size: 0.85rem; }
   th, td { padding: 0.45rem 0.55rem; }
+  .contract-address { gap: 0.25rem; padding: 0.05rem 0.4rem; font-size: 0.8em; }
+  .contract-address .ca-label { display: none; }
 }

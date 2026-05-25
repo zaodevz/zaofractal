@@ -3,20 +3,52 @@ import { getCollection, render } from 'astro:content';
 import DocLayout from '../../layouts/DocLayout.astro';
 
 export async function getStaticPaths() {
+  const deriveTitle = (slug: string, body: string | undefined): string => {
+    const h1 = body?.match(/^#\s+(.+)$/m)?.[1];
+    if (h1) return h1.trim();
+    return slug.split('/').pop()!.replace(/\.md$/, '').replace(/^ch?\d+-/, '').replace(/-/g, ' ');
+  };
+
   const docs = await getCollection('whitepaper');
-  return docs.map((doc) => ({
-    params: { slug: doc.id.replace(/\.md$/, '') },
-    props: { doc },
-  }));
+  const ordered = docs.slice().sort((a, b) => {
+    const aReadme = a.id.toLowerCase().includes('readme') ? -1 : 0;
+    const bReadme = b.id.toLowerCase().includes('readme') ? -1 : 0;
+    if (aReadme !== bReadme) return aReadme - bReadme;
+    return a.id.localeCompare(b.id);
+  });
+  return ordered.map((doc, i) => {
+    const prevDoc = ordered[i - 1] ?? null;
+    const nextDoc = ordered[i + 1] ?? null;
+    return {
+      params: { slug: doc.id.replace(/\.md$/, '') },
+      props: {
+        doc,
+        prev: prevDoc
+          ? { href: `/whitepaper/${prevDoc.id.replace(/\.md$/, '')}`, title: deriveTitle(prevDoc.id, prevDoc.body) }
+          : null,
+        next: nextDoc
+          ? { href: `/whitepaper/${nextDoc.id.replace(/\.md$/, '')}`, title: deriveTitle(nextDoc.id, nextDoc.body) }
+          : null,
+      },
+    };
+  });
 }
 
-const { doc } = Astro.props;
-const { Content } = await render(doc);
+const { doc, prev, next } = Astro.props;
+const { Content, headings } = await render(doc);
 const fm: any = (doc as any).data ?? {};
 
 const h1 = doc.body?.match(/^#\s+(.+)$/m)?.[1];
 const title = h1 ?? doc.id;
 ---
-<DocLayout title={title} collection="whitepaper" slug={doc.id.replace(/\.md$/, '')} frontmatter={fm}>
+<DocLayout
+  title={title}
+  collection="whitepaper"
+  slug={doc.id.replace(/\.md$/, '')}
+  frontmatter={fm}
+  headings={headings}
+  prev={prev}
+  next={next}
+>
   <Content />
 </DocLayout>

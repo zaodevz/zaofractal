@@ -1,0 +1,102 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings = [] } = Astro.props;
+
+// Filter to h2 + h3 only - h1 is the page title, h4+ is too noisy for a sidebar.
+const visible = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+{visible.length > 0 && (
+  <aside class="toc" aria-label="Table of contents">
+    <div class="toc-label">On this page</div>
+    <ol class="toc-list">
+      {visible.map((h) => (
+        <li class={`toc-item depth-${h.depth}`}>
+          <a href={`#${h.slug}`} data-toc-slug={h.slug}>{h.text}</a>
+        </li>
+      ))}
+    </ol>
+  </aside>
+)}
+
+<script>
+  // Scroll-spy: highlight the TOC item whose heading is currently in view.
+  const tocLinks = Array.from(document.querySelectorAll('.toc a'));
+  if (tocLinks.length > 0) {
+    const slugToLink = new Map();
+    tocLinks.forEach((a) => {
+      const slug = (a as HTMLElement).dataset.tocSlug;
+      if (slug) slugToLink.set(slug, a);
+    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const link = slugToLink.get(entry.target.id);
+          if (!link) return;
+          if (entry.isIntersecting) {
+            tocLinks.forEach((l) => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      },
+      { rootMargin: '-15% 0% -70% 0%', threshold: 0 }
+    );
+    document.querySelectorAll('article h2, article h3').forEach((h) => observer.observe(h));
+  }
+</script>
+
+<style>
+  .toc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    padding: 0.25rem 0.5rem 1rem 0;
+    color: var(--text-muted);
+  }
+  .toc-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--orange);
+    margin-bottom: 0.6rem;
+  }
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toc-item {
+    margin: 0;
+  }
+  .toc-item a {
+    display: block;
+    padding: 0.25rem 0;
+    color: var(--text-muted);
+    border: none;
+    text-decoration: none;
+    transition: color 0.15s;
+    line-height: 1.4;
+  }
+  .toc-item a:hover { color: var(--cyan); }
+  .toc-item a.active { color: var(--gold); font-weight: 600; }
+  .toc-item.depth-3 a {
+    padding-left: 0.8rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .toc-item.depth-3 a.active { color: var(--gold); }
+
+  /* Hide TOC entirely on narrow screens - inline TOC could be added later */
+  @media (max-width: 1279px) {
+    .toc { display: none; }
+  }
+</style>

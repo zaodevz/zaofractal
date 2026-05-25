@@ -1,0 +1,81 @@
+---
+interface Props {
+  collection: 'reference' | 'research' | 'whitepaper';
+  slug: string;
+  title: string;
+}
+
+const { collection, slug, title } = Astro.props;
+const labelMap: Record<string, string> = {
+  reference: 'Reference',
+  research: 'Research',
+  whitepaper: 'Whitepaper',
+};
+
+// Split slug into segments so a slug like "fractal-deep/04-optimystics-tools-survey"
+// gives us [fractal-deep, 04-optimystics-tools-survey]. The last segment is the doc itself.
+const segments = slug.split('/');
+const folderSegments = segments.slice(0, -1);
+
+function humanize(s: string): string {
+  return s
+    .replace(/^\d+[a-z]?-/, '')
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+---
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li class="sep" aria-hidden="true">/</li>
+    <li><a href={`/${collection}`}>{labelMap[collection]}</a></li>
+    {folderSegments.map((seg, i) => {
+      const path = `/${collection}/${folderSegments.slice(0, i + 1).join('/')}`;
+      return (
+        <>
+          <li class="sep" aria-hidden="true">/</li>
+          <li><span class="folder">{humanize(seg)}</span></li>
+        </>
+      );
+    })}
+    <li class="sep" aria-hidden="true">/</li>
+    <li class="current" aria-current="page">{title}</li>
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .breadcrumbs ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .breadcrumbs li { margin: 0; }
+  .breadcrumbs a {
+    color: var(--text-muted);
+    border: none;
+    transition: color 0.15s;
+  }
+  .breadcrumbs a:hover { color: var(--cyan); }
+  .breadcrumbs .sep { color: var(--text-dim); user-select: none; }
+  .breadcrumbs .folder { color: var(--text-muted); }
+  .breadcrumbs .current {
+    color: var(--gold);
+    max-width: 22rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media (max-width: 600px) {
+    .breadcrumbs .current { max-width: 12rem; }
+  }
+</style>
