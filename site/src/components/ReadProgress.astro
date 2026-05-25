@@ -1,0 +1,46 @@
+---
+// Sticky top progress bar - fills as the reader scrolls through the article.
+// Mounted only on whitepaper draft pages where long-form reading matters most.
+---
+<div class="read-progress" aria-hidden="true">
+  <div class="read-progress-fill" id="read-progress-fill"></div>
+</div>
+
+<script>
+  const fill = document.getElementById('read-progress-fill');
+  function update() {
+    if (!fill) return;
+    const article = document.querySelector('article');
+    if (!article) return;
+    const rect = article.getBoundingClientRect();
+    const total = article.scrollHeight;
+    const viewportTop = -rect.top;
+    const viewportBottom = viewportTop + window.innerHeight;
+    const progress = Math.max(0, Math.min(1, viewportBottom / total));
+    fill.style.transform = `scaleX(${progress})`;
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+</script>
+
+<style>
+  .read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 107, 26, 0.12);
+    z-index: 60;
+    pointer-events: none;
+  }
+  .read-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--orange), var(--gold), var(--cyan));
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.1s linear;
+    box-shadow: 0 0 12px rgba(255, 201, 60, 0.6);
+  }
+</style>

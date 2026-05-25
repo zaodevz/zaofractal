@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
 import { getCollection } from 'astro:content';
+import { currentFractalWeek } from '../lib/week';
 
 const reference = await getCollection('reference');
 const research = await getCollection('research');
@@ -9,30 +11,12 @@ const whitepaper = await getCollection('whitepaper');
 const refCount = reference.length;
 const resCount = research.length;
 const wpCount = whitepaper.length;
+const weekNumber = currentFractalWeek();
 ---
 <BaseLayout title="ZAOfractal">
-  <h1 class="tag-orange">ZAOfractal</h1>
+  <Hero weekNumber={weekNumber} />
 
-  <p style="font-size: 1.1rem; color: var(--text-muted);">
-    Home of <strong style="color: var(--text)">ZAO Fractal</strong> - the weekly Respect Game
-    that has run unbroken on Mondays at 6pm EST since around August 2024. The only
-    music-focused fractal in existence, the only active fractal on Optimism, and one
-    of two on the Ethereum Superchain.
-  </p>
-
-  <h2>What is a fractal?</h2>
-  <p>
-    A small-group consensus meeting that distributes a soulbound reputation token
-    (Respect) to participants based on how their peers rank their recent contribution.
-    Repeat weekly. Governance weight comes from contribution, not capital.
-  </p>
-  <p>
-    The idea was formalized by Daniel Larimer in <em>More Equal Animals</em> (Feb 20, 2021)
-    and the Fractally protocol (Jan 28, 2022). Eden Fractal proved it could run for years.
-    Optimism Fractal brought it to Ethereum. ZAO Fractal is the first to apply it to music.
-  </p>
-
-  <h2>Browse</h2>
+  <h2>Browse the docs</h2>
   <div class="doc-grid">
     <div class="doc-card">
       <a href="/reference">
@@ -76,11 +60,36 @@ const wpCount = whitepaper.length;
     </div>
   </div>
 
-  <h2>Live ZAO Fractal facts (as of May 2026)</h2>
+  <h2>Visual explorations</h2>
+  <p class="muted">
+    Two pages built on top of the canonical Markdown source for non-linear browsing.
+  </p>
+  <div class="doc-grid">
+    <div class="doc-card">
+      <a href="/lineage">
+        <div class="title tag-cyan">Lineage timeline</div>
+        <div class="meta">2014 -> 2026 - the fractal-democracy story</div>
+        <p class="muted" style="margin-top: 0.5rem; font-size: 0.9rem;">
+          Larimer's BitShares through ZAO Fractal Week {weekNumber}. Every milestone color-coded by era.
+        </p>
+      </a>
+    </div>
+    <div class="doc-card">
+      <a href="/people">
+        <div class="title tag-gold">People</div>
+        <div class="meta">Who built this lineage</div>
+        <p class="muted" style="margin-top: 0.5rem; font-size: 0.9rem;">
+          Larimer, SingJoy, Tadas, Zaal, Mikael, plus the founders of every active fractal community.
+        </p>
+      </a>
+    </div>
+  </div>
+
+  <h2>Live ZAO Fractal facts</h2>
   <table>
     <tbody>
       <tr><td><strong>Cadence</strong></td><td>Mondays 6pm EST, weekly. Also runs anytime with 4+ unplayed members.</td></tr>
-      <tr><td><strong>Streak</strong></td><td>100+ continuous weeks</td></tr>
+      <tr><td><strong>Streak</strong></td><td>Week {weekNumber}+ continuous</td></tr>
       <tr><td><strong>Surface</strong></td><td>Discord bot <code>fractalbotmarch2026</code> (52 slash commands, v2.1)</td></tr>
       <tr><td><strong>Chain</strong></td><td>Optimism (OP Mainnet)</td></tr>
       <tr><td><strong>OREC executor</strong></td><td><code>0xcB05F9254765CA521F7698e61E0A6CA6456Be532</code></td></tr>

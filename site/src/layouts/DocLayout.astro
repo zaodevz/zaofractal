@@ -7,6 +7,7 @@ import PrevNext from '../components/PrevNext.astro';
 import ShareBar from '../components/ShareBar.astro';
 import DocMeta from '../components/DocMeta.astro';
 import Sidebar from '../components/Sidebar.astro';
+import ReadProgress from '../components/ReadProgress.astro';
 
 interface NavLink {
   href: string;
@@ -41,8 +42,12 @@ const pills = pillFields
 const repoPath = `https://github.com/ZAODEVZ/ZAOfractal/blob/main/${collection}/${slug}.md`;
 const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = `/og/${collection}/${slug}.png`;
+
+// Long-form reading: whitepaper draft pages get the top progress bar.
+const showReadProgress = collection === 'whitepaper' && slug.startsWith('draft/');
 ---
 <BaseLayout title={title} ogImage={ogImage}>
+  {showReadProgress && <ReadProgress />}
   <div class="doc-grid-3col">
     <aside class="doc-sidebar-rail">
       <Sidebar />

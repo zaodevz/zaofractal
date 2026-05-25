@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PEOPLE, GROUP_LABEL, ACCENT_TO_VAR, type Person } from '../lib/people';
+
+const groups: Person['group'][] = ['founders', 'optimystics', 'zao', 'fractal-founders'];
+---
+<BaseLayout title="People">
+  <h1>People</h1>
+  <p class="muted" style="font-size: 1.05rem;">
+    The fractal-governance lineage is built by a small group of people who all know each other.
+    Knowing the names makes the rest of the lineage make sense. Sourced from
+    <a href="/reference/11-key-people">reference doc 11</a> + targeted gap-fill research.
+  </p>
+
+  {groups.map((g) => (
+    <section class="people-section">
+      <h2>{GROUP_LABEL[g]}</h2>
+      <div class="people-grid">
+        {PEOPLE.filter((p) => p.group === g).map((p) => (
+          <article class="person-card" style={`--accent: ${ACCENT_TO_VAR[p.accent]}`}>
+            <div class="person-avatar" aria-hidden="true">
+              <span>{p.initials}</span>
+            </div>
+            <div class="person-body">
+              <h3 class="person-name">{p.name}</h3>
+              <div class="person-role">{p.role}</div>
+              <p class="person-blurb">{p.blurb}</p>
+              {p.links.length > 0 && (
+                <div class="person-links">
+                  {p.links.map((l) => (
+                    <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label} &rarr;</a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+</BaseLayout>
+
+<style>
+  .people-section {
+    margin-top: 2.5rem;
+  }
+  .people-section h2 {
+    color: var(--cyan);
+    margin-bottom: 1rem;
+  }
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+  .person-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1.1rem 1.15rem;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .person-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .person-avatar {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-elev));
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+  .person-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .person-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin: 0 0 0.15rem;
+  }
+  .person-role {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .person-blurb {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 0 0 0.5rem;
+  }
+  .person-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+  }
+  .person-links a {
+    color: var(--text-dim);
+    border: none;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .person-links a:hover { color: var(--accent); }
+</style>

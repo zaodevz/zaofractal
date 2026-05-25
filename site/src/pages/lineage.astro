@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { TIMELINE, ERA_LABEL, ERA_COLOR, type Era } from '../lib/timeline';
+
+const eras: Era[] = ['pre-fractal', 'fractally', 'eos-eden', 'optimism-fractal', 'zao'];
+---
+<BaseLayout title="Lineage">
+  <h1>Lineage</h1>
+  <p class="muted" style="font-size: 1.05rem;">
+    The 12-year arc from Daniel Larimer's BitShares to today's ZAO Fractal. Sortition <em>was</em> ancient
+    Athens. Soulbound peer-ranked reputation <em>is</em> ZAO. Same idea, twelve years apart, on a different
+    chain each time.
+  </p>
+
+  <div class="era-legend" aria-label="Era key">
+    {eras.map((e) => (
+      <span class="era-pill" style={`--era: ${ERA_COLOR[e]}`}>
+        <span class="dot"></span>{ERA_LABEL[e]}
+      </span>
+    ))}
+  </div>
+
+  <ol class="timeline" aria-label="Timeline">
+    {TIMELINE.map((event, i) => (
+      <li class={`tl-item tl-${event.era} ${i % 2 === 0 ? 'tl-left' : 'tl-right'}`}>
+        <span class="tl-dot" style={`--era: ${ERA_COLOR[event.era]}`} aria-hidden="true"></span>
+        <article class="tl-card" style={`--era: ${ERA_COLOR[event.era]}`}>
+          <div class="tl-when">{event.when}</div>
+          <h3 class="tl-title">{event.url ? <a href={event.url} target="_blank" rel="noopener noreferrer">{event.title}</a> : event.title}</h3>
+          <p class="tl-body">{event.body}</p>
+          <div class="tl-era">{ERA_LABEL[event.era]}</div>
+        </article>
+      </li>
+    ))}
+  </ol>
+
+  <h2 style="margin-top: 3rem;">Read more</h2>
+  <ul>
+    <li><a href="/reference/14-timeline">Reference - full timeline doc (with sources)</a></li>
+    <li><a href="/research/fractal-deep/01-eos-fractally-origins">Research - EOS + Fractally origins (591 lines, 37 sources)</a></li>
+    <li><a href="/research/fractal-deep/02-eden-fractal-full-history">Research - Eden Fractal end-to-end</a></li>
+    <li><a href="/research/fractal-deep/03-optimism-fractal-full-history">Research - Optimism Fractal end-to-end</a></li>
+  </ul>
+</BaseLayout>
+
+<style>
+  .era-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.5rem 0 2.5rem;
+    padding: 0.85rem 1rem;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .era-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .era-pill .dot {
+    width: 10px;
+    height: 10px;
+    background: var(--era);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--era);
+  }
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--border) 8%, var(--border) 92%, transparent);
+    transform: translateX(-0.5px);
+  }
+  .tl-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 32px 1fr;
+    align-items: start;
+    margin-bottom: 2rem;
+  }
+  .tl-dot {
+    grid-column: 2;
+    width: 16px;
+    height: 16px;
+    background: var(--era);
+    border: 3px solid var(--bg);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--era);
+    margin: 1rem auto 0;
+    position: relative;
+    z-index: 1;
+  }
+  .tl-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--era);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.15rem;
+    position: relative;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .tl-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--era);
+  }
+  .tl-left .tl-card {
+    grid-column: 1;
+    text-align: right;
+    border-left: 1px solid var(--border);
+    border-right: 3px solid var(--era);
+    border-radius: 8px 0 0 8px;
+  }
+  .tl-right .tl-card {
+    grid-column: 3;
+  }
+  .tl-when {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+  .tl-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
+  }
+  .tl-title a {
+    color: var(--cyan);
+    border: none;
+  }
+  .tl-title a:hover { color: var(--era); }
+  .tl-body {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin: 0 0 0.5rem;
+  }
+  .tl-era {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.65rem;
+    color: var(--era);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  @media (max-width: 760px) {
+    .timeline::before { left: 16px; }
+    .tl-item { grid-template-columns: 32px 1fr; }
+    .tl-dot { grid-column: 1; margin: 1rem 0 0 9px; }
+    .tl-left .tl-card, .tl-right .tl-card {
+      grid-column: 2;
+      text-align: left;
+      border-left: 3px solid var(--era);
+      border-right: 1px solid var(--border);
+      border-radius: 0 8px 8px 0;
+    }
+  }
+</style>
