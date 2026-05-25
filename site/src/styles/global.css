@@ -93,9 +93,10 @@ article h2:first-of-type + p::first-letter {
   color: var(--orange);
 }
 
-/* When ChapterHero is rendered, hide the H1 inside the Markdown article body
- * (the chapter header is already shown by ChapterHero). */
-article.hide-article-h1 > h1:first-child {
+/* When ChapterHero is rendered, hide ALL H1s inside the Markdown article body
+ * (the chapter header is already shown by ChapterHero - whitepaper chapters only
+ * have a single H1 each). */
+article.hide-article-h1 h1 {
   display: none;
 }
 
